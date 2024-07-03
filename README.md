@@ -1,2 +1,4 @@
-# UTSMEConnect
-A multi-platform application for UTS:ME team to track real-time data from the formula race car.
+# utsmeconnect
+
+An Android & iOS application for UTS:ME team to track data from the race car.
+
