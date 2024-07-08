@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:utsmeconnect/src/features/home/view/screens/home_screen.dart';
+import 'package:utsmeconnect/src/features/home/view/screens/power_screen.dart';
 import 'package:utsmeconnect/src/features/navigation_bar/view/screens/utsmeconnect_navigation_bar.dart';
 import 'package:utsmeconnect/src/features/settings/view/screens/settings_screen.dart';
 import 'package:utsmeconnect/src/features/splash/view/screens/splash_screen.dart';
+
+enum UTSMEConnectRoutes {
+  splash,
+  power,
+  settings,
+}
 
 class UTSMEConnectRouter {
   // ensure this class cannot be initialized
@@ -11,20 +17,20 @@ class UTSMEConnectRouter {
 
   // private navigator key
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _rootNavigatorHome = GlobalKey<NavigatorState>();
+  static final _rootNavigatorPower = GlobalKey<NavigatorState>();
   static final _rootNavigatorSettings = GlobalKey<NavigatorState>();
 
   // static is very important to prevent
   // the splash screen from always replaying
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: "/splash",
+    initialLocation: "/${UTSMEConnectRoutes.splash.name}",
     routes: <RouteBase>[
       // Splash Branch
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,
-        path: "/splash",
-        name: "Splash",
+        path: "/${UTSMEConnectRoutes.splash.name}",
+        name: UTSMEConnectRoutes.splash.name,
         builder: (context, state) => SplashScreen(key: state.pageKey),
       ),
 
@@ -35,12 +41,12 @@ class UTSMEConnectRouter {
         branches: <StatefulShellBranch>[
           // Home Branch
           StatefulShellBranch(
-            navigatorKey: _rootNavigatorHome,
+            navigatorKey: _rootNavigatorPower,
             routes: [
               GoRoute(
-                path: "/power",
-                name: "Power",
-                builder: (context, state) => HomeScreen(key: state.pageKey),
+                path: "/${UTSMEConnectRoutes.power.name}",
+                name: UTSMEConnectRoutes.power.name,
+                builder: (context, state) => PowerScreen(key: state.pageKey),
               )
             ],
           ),
@@ -50,8 +56,8 @@ class UTSMEConnectRouter {
             navigatorKey: _rootNavigatorSettings,
             routes: [
               GoRoute(
-                path: "/settings",
-                name: "Settings",
+                path: "/${UTSMEConnectRoutes.settings.name}",
+                name: UTSMEConnectRoutes.settings.name,
                 builder: (context, state) => SettingsScreen(key: state.pageKey),
               )
             ],

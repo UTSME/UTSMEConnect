@@ -20,7 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
       Timer(
           const Duration(seconds: 3),
           // Use "goNamed" for splash screens with bottom navigation bars
-          () => UTSMEConnectRouter.router.goNamed("Power"));
+          () =>
+              UTSMEConnectRouter.router.goNamed(UTSMEConnectRoutes.power.name));
     }
   }
 

@@ -17,7 +17,7 @@ class SettingsScreen extends ConsumerWidget {
           color: UTSMEConnectColors.kBackgroundSecondary,
           child: const Center(
             child: Text(
-              "Seetings Screen",
+              "Settings Screen",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white70),
             ),
