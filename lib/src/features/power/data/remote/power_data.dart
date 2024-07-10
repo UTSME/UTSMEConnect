@@ -6,6 +6,7 @@ class PowerData {
   PowerData._();
 
   static double fetchCharge() {
+    //fetch the charge data each 5 seconds
     return Random().nextInt(100).toDouble();
   }
 }

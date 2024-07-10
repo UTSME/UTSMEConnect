@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:utsmeconnect/src/features/power/data/remote/power_data.dart';
 
@@ -18,10 +20,14 @@ class PowerState {
 
 /// class to do operations on the properties
 class PowerController extends StateNotifier<PowerState> {
-  PowerController(super.state);
+  PowerController(super.state) {
+    periodicallyUpdateChargeData();
+  }
 
-  void updateChargeData() {
-    state.charge = PowerData.fetchCharge();
+  void periodicallyUpdateChargeData() async {
+    Timer.periodic(const Duration(microseconds: 1), (timer) {
+      state.charge = PowerData.fetchCharge();
+    });
     state = state.copyWith(charge: state.charge);
   }
 }

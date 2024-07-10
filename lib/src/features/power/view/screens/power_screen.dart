@@ -1,22 +1,42 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
-import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:utsmeconnect/src/features/power/controller/power_controller.dart';
 
-class PowerScreen extends ConsumerWidget {
+class PowerScreen extends ConsumerStatefulWidget {
   const PowerScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    //the controller for the power screen
-    final powerControllerState = ref.watch(powerControllerProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => _PowerScreenState();
+}
 
+class _PowerScreenState extends ConsumerState<PowerScreen> {
+  late PowerState powerControllerState = ref.watch(powerControllerProvider);
+  late double charge = 100;
+
+  void periodicallyUpdateChargeData() {
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      double newCharge = powerControllerState.charge;
+      if (charge != newCharge) {
+        setState(() {
+          charge = newCharge;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    periodicallyUpdateChargeData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
-
-    ValueNotifier<double> powerChargeNotifier =
-        ValueNotifier(powerControllerState.charge);
 
     return Scaffold(
       backgroundColor: UTSMEConnectColors.kBackgroundPrimary,
@@ -38,13 +58,23 @@ class PowerScreen extends ConsumerWidget {
                   children: [
                     const Text("CURRENT CHARGE:  ",
                         style: TextStyle(color: Colors.white70, fontSize: 20)),
-                    SimpleCircularProgressBar(
-                      size: 70,
-                      maxValue: 100,
-                      valueNotifier: powerChargeNotifier,
-                      progressColors: const [UTSMEConnectColors.kSelectedItem],
-                      progressStrokeWidth: 12,
-                      mergeMode: true,
+                    CircularPercentIndicator(
+                      radius: 48,
+                      percent: charge / 100.0,
+                      lineWidth: 12,
+                      animation: true,
+                      animationDuration: 1200,
+                      animateFromLastPercent: true,
+                      curve: Curves.linearToEaseOut,
+                      circularStrokeCap: CircularStrokeCap.round,
+                      progressColor: UTSMEConnectColors.kSelectedItem,
+                      backgroundColor: Colors.white24,
+                      backgroundWidth: 12,
+                      center: Text(
+                        "${charge.toInt()}%",
+                        style: const TextStyle(
+                            color: Colors.white70, fontSize: 20),
+                      ),
                     ),
                   ],
                 ),
