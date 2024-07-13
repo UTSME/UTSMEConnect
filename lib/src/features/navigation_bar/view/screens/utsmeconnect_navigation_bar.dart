@@ -45,6 +45,10 @@ class _UTSMEConnectNavigationBarState extends State<UTSMEConnectNavigationBar> {
         },
         items: const [
           BottomNavigationBarItem(
+            icon: Icon(Icons.speed_rounded),
+            label: "Dashboard",
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.electric_bolt),
             label: "Power Readings",
           ),

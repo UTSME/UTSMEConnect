@@ -56,8 +56,12 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text("CURRENT CHARGE:  ",
-                        style: TextStyle(color: Colors.white70, fontSize: 20)),
+                    const Text("Current Charge",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        )),
                     CircularPercentIndicator(
                       radius: 48,
                       percent: charge / 100.0,
