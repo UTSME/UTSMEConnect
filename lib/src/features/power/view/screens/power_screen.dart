@@ -44,6 +44,7 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
           child: Center(
         child: Column(
           children: [
+            // Current Charge
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
