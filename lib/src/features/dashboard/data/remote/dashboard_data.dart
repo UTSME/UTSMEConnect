@@ -12,11 +12,6 @@ class DashboardData {
     return Random().nextInt(UTSMEConnectValues.kMaxSpeed).toDouble();
   }
 
-  static double fetchTireTemperature() {
-    //fetch the tire temperature
-    return Random().nextInt(UTSMEConnectValues.kTireTemperature).toDouble();
-  }
-
   static double fetchSuspension() {
     //fetch the suspension
     return Random().nextInt(UTSMEConnectValues.kSuspension).toDouble();

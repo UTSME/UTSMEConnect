@@ -5,11 +5,13 @@ import 'package:utsmeconnect/src/features/power/view/screens/power_screen.dart';
 import 'package:utsmeconnect/src/features/navigation_bar/view/screens/utsmeconnect_navigation_bar.dart';
 import 'package:utsmeconnect/src/features/settings/view/screens/settings_screen.dart';
 import 'package:utsmeconnect/src/features/splash/view/screens/splash_screen.dart';
+import 'package:utsmeconnect/src/features/temperature/view/screens/temperature_screen.dart';
 
 enum UTSMEConnectRoutes {
   splash,
   dashboard,
   power,
+  temperature,
   settings,
 }
 
@@ -21,6 +23,7 @@ class UTSMEConnectRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _rootNavigatorDashboard = GlobalKey<NavigatorState>();
   static final _rootNavigatorPower = GlobalKey<NavigatorState>();
+  static final _rootNavigatorTemperature = GlobalKey<NavigatorState>();
   static final _rootNavigatorSettings = GlobalKey<NavigatorState>();
 
   // static is very important to prevent
@@ -63,6 +66,19 @@ class UTSMEConnectRouter {
                 path: "/${UTSMEConnectRoutes.power.name}",
                 name: UTSMEConnectRoutes.power.name,
                 builder: (context, state) => PowerScreen(key: state.pageKey),
+              )
+            ],
+          ),
+
+          // Temperature Branch
+          StatefulShellBranch(
+            navigatorKey: _rootNavigatorTemperature,
+            routes: [
+              GoRoute(
+                path: "/${UTSMEConnectRoutes.temperature.name}",
+                name: UTSMEConnectRoutes.temperature.name,
+                builder: (context, state) =>
+                    TemperatureScreen(key: state.pageKey),
               )
             ],
           ),

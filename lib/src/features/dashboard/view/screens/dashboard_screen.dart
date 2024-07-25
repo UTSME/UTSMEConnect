@@ -22,20 +22,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   // Initialize the dashboard values
   late double speed = 0;
-  late double tireTemperature = 0;
   late double suspension = 0;
 
   void periodicallyUpdateDashboardData() {
     Timer.periodic(const Duration(seconds: 3), (timer) {
       double newSpeed = dashboardControllerState.speed;
-      double newTireTemperature = dashboardControllerState.tireTemperature;
       double newSuspension = dashboardControllerState.suspension;
-      if (speed != newSpeed ||
-          tireTemperature != newTireTemperature ||
-          suspension != newSuspension) {
+      if (speed != newSpeed || suspension != newSuspension) {
         setState(() {
           speed = newSpeed;
-          tireTemperature = newTireTemperature;
           suspension = newSuspension;
         });
       }
@@ -92,17 +87,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     ),
                   ],
                 ),
-              ),
-            ),
-
-            // Tire Temperature
-            VerticalCard(
-              screenWidth: screenWidth,
-              cardHeight: 150,
-              cardLabel: "Tire Temperature",
-              cardWidget: Text(
-                "${(tireTemperature).toInt()}°",
-                style: const TextStyle(color: Colors.white70, fontSize: 70),
               ),
             ),
 

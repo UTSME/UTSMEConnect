@@ -32,6 +32,7 @@ class _UTSMEConnectNavigationBarState extends State<UTSMEConnectNavigationBar> {
         child: widget.navigationShell,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: UTSMEConnectColors.kBackgroundSecondary,
         selectedItemColor: UTSMEConnectColors.kSelectedItem,
         unselectedItemColor: Colors.white70,
@@ -50,7 +51,11 @@ class _UTSMEConnectNavigationBarState extends State<UTSMEConnectNavigationBar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.electric_bolt),
-            label: "Power Readings",
+            label: "Power",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.thermostat),
+            label: "Temperature",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
