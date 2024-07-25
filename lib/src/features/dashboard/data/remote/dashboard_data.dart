@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:utsmeconnect/src/core/constants/utsmeconnect_values.dart';
+
 // Singleton class to contact the endpoint
 // to fetch information about the car dashboard
 class DashboardData {
@@ -7,16 +9,16 @@ class DashboardData {
 
   static double fetchSpeed() {
     //fetch the charge
-    return Random().nextInt(150).toDouble();
+    return Random().nextInt(UTSMEConnectValues.kMaxSpeed).toDouble();
   }
 
   static double fetchTireTemperature() {
     //fetch the tire temperature
-    return Random().nextInt(80).toDouble();
+    return Random().nextInt(UTSMEConnectValues.kTireTemperature).toDouble();
   }
 
   static double fetchSuspension() {
     //fetch the suspension
-    return Random().nextInt(250).toDouble();
+    return Random().nextInt(UTSMEConnectValues.kSuspension).toDouble();
   }
 }

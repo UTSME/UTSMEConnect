@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
+import 'package:utsmeconnect/src/core/constants/utsmeconnect_values.dart';
 import 'package:utsmeconnect/src/features/dashboard/controller/dashboard_controller.dart';
 import 'package:utsmeconnect/src/features/shared/view/widgets/vertical_card.dart';
 
@@ -65,7 +66,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               cardLabel: "Speed",
               cardWidget: CircularPercentIndicator(
                 radius: 75,
-                percent: ((speed * 100) / 150) / 100,
+                percent: ((speed * 100) / UTSMEConnectValues.kMaxSpeed) / 100,
                 lineWidth: 15,
                 animation: true,
                 animationDuration: 1200,
