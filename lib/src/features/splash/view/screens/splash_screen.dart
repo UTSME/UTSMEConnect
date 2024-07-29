@@ -1,18 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:utsmeconnect/src/core/navigation/utsmeconnect_router.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 import 'package:utsmeconnect/src/features/splash/view/widgets/rectangular_container.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -27,16 +28,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        backgroundColor: UTSMEConnectColors.kBackgroundPrimary,
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
+    return Scaffold(
+        backgroundColor: themeController.getBackgroundPrimaryColor(),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Center(
               child: RectangularContainer(
                 value: "UTS:ME Connect",
-                borderColor: UTSMEConnectColors.kBackgroundSecondary,
-                rectangleColor: UTSMEConnectColors.kBackgroundPrimary,
+                borderColor: themeController.getBackgroundSecondaryColor(),
+                rectangleColor: themeController.getBackgroundPrimaryColor(),
               ),
             ),
           ),

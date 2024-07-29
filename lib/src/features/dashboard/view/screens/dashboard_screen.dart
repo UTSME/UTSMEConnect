@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_values.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 import 'package:utsmeconnect/src/features/dashboard/controller/dashboard_controller.dart';
 import 'package:utsmeconnect/src/features/shared/view/widgets/vertical_card.dart';
 
@@ -45,11 +45,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      backgroundColor: UTSMEConnectColors.kBackgroundPrimary,
+      backgroundColor: themeController.getBackgroundPrimaryColor(),
       body: SafeArea(
           child: Center(
         child: Column(
@@ -68,22 +72,23 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 animateFromLastPercent: true,
                 curve: Curves.linearToEaseOut,
                 arcType: ArcType.HALF,
-                arcBackgroundColor: Colors.white24,
+                arcBackgroundColor: themeController.getInActiveItemColor(),
                 circularStrokeCap: CircularStrokeCap.round,
-                progressColor: UTSMEConnectColors.kSelectedItem,
-                backgroundColor: Colors.white24,
+                progressColor: themeController.getActiveItemColor(),
+                backgroundColor: themeController.getInActiveItemColor(),
                 backgroundWidth: 15,
                 center: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "${(speed).toInt()}",
-                      style:
-                          const TextStyle(color: Colors.white70, fontSize: 50),
+                      style: TextStyle(
+                          color: themeController.getTextColor(), fontSize: 50),
                     ),
-                    const Text(
+                    Text(
                       "KM/H",
-                      style: TextStyle(color: Colors.white70, fontSize: 15),
+                      style: TextStyle(
+                          color: themeController.getTextColor(), fontSize: 15),
                     ),
                   ],
                 ),
@@ -101,12 +106,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   text: TextSpan(children: [
                     TextSpan(
                       text: "${(suspension).toInt()}",
-                      style:
-                          const TextStyle(color: Colors.white70, fontSize: 70),
+                      style: TextStyle(
+                          color: themeController.getTextColor(), fontSize: 70),
                     ),
-                    const TextSpan(
+                    TextSpan(
                       text: "mm",
-                      style: TextStyle(color: Colors.white70, fontSize: 25),
+                      style: TextStyle(
+                          color: themeController.getTextColor(), fontSize: 25),
                     ),
                   ]),
                 ),

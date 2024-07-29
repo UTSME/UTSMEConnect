@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 
-class UTSMEConnectNavigationBar extends StatefulWidget {
+class UTSMEConnectNavigationBar extends ConsumerStatefulWidget {
   const UTSMEConnectNavigationBar({
     super.key,
     required this.navigationShell,
@@ -11,11 +12,12 @@ class UTSMEConnectNavigationBar extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
 
   @override
-  State<UTSMEConnectNavigationBar> createState() =>
+  ConsumerState<UTSMEConnectNavigationBar> createState() =>
       _UTSMEConnectNavigationBarState();
 }
 
-class _UTSMEConnectNavigationBarState extends State<UTSMEConnectNavigationBar> {
+class _UTSMEConnectNavigationBarState
+    extends ConsumerState<UTSMEConnectNavigationBar> {
   int selectedIndex = 0;
 
   void _goToBranch(int index) {
@@ -25,6 +27,10 @@ class _UTSMEConnectNavigationBarState extends State<UTSMEConnectNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
@@ -33,9 +39,9 @@ class _UTSMEConnectNavigationBarState extends State<UTSMEConnectNavigationBar> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: UTSMEConnectColors.kBackgroundSecondary,
-        selectedItemColor: UTSMEConnectColors.kSelectedItem,
-        unselectedItemColor: Colors.white70,
+        backgroundColor: themeController.getBackgroundSecondaryColor(),
+        selectedItemColor: themeController.getActiveItemColor(),
+        unselectedItemColor: themeController.getTextColor(),
         currentIndex: selectedIndex,
         iconSize: 30,
         onTap: (index) {

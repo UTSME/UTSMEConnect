@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 
-class HorizontalCardWithPercentage extends StatelessWidget {
+class HorizontalCardWithPercentage extends ConsumerWidget {
   const HorizontalCardWithPercentage({
     super.key,
     required this.screenWidth,
@@ -15,23 +16,29 @@ class HorizontalCardWithPercentage extends StatelessWidget {
   final double value;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
+    double primaryTextSize = themeController.getPrimaryTextSize();
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
         width: screenWidth - 50,
         height: 140,
         decoration: BoxDecoration(
-          color: UTSMEConnectColors.kBackgroundSecondary,
+          color: themeController.getBackgroundSecondaryColor(),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(label,
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 20,
+                style: TextStyle(
+                  color: themeController.getTextColor(),
+                  fontSize: primaryTextSize,
                   fontWeight: FontWeight.bold,
                 )),
             CircularPercentIndicator(
@@ -43,12 +50,14 @@ class HorizontalCardWithPercentage extends StatelessWidget {
               animateFromLastPercent: true,
               curve: Curves.linearToEaseOut,
               circularStrokeCap: CircularStrokeCap.round,
-              progressColor: UTSMEConnectColors.kSelectedItem,
-              backgroundColor: Colors.white24,
+              progressColor: themeController.getActiveItemColor(),
+              backgroundColor: themeController.getInActiveItemColor(),
               backgroundWidth: 12,
               center: Text(
                 "${value.toInt()}%",
-                style: const TextStyle(color: Colors.white70, fontSize: 20),
+                style: TextStyle(
+                    color: themeController.getTextColor(),
+                    fontSize: primaryTextSize),
               ),
             ),
           ],

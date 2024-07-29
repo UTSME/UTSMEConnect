@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 import 'package:utsmeconnect/src/features/shared/view/widgets/vertical_card.dart';
 import 'package:utsmeconnect/src/features/temperature/controller/temperature_controller.dart';
 
@@ -40,11 +40,15 @@ class _TemperatureScreenState extends ConsumerState<TemperatureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      backgroundColor: UTSMEConnectColors.kBackgroundPrimary,
+      backgroundColor: themeController.getBackgroundPrimaryColor(),
       body: SafeArea(
           child: Center(
         child: Column(
@@ -56,7 +60,8 @@ class _TemperatureScreenState extends ConsumerState<TemperatureScreen> {
               cardLabel: "Tire Temperature",
               cardWidget: Text(
                 "${(tireTemperature).toInt()}°",
-                style: const TextStyle(color: Colors.white70, fontSize: 70),
+                style: TextStyle(
+                    color: themeController.getTextColor(), fontSize: 70),
               ),
             ),
           ],

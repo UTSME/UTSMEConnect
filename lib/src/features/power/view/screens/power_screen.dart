@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_values.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 import 'package:utsmeconnect/src/features/power/controller/power_controller.dart';
 import 'package:utsmeconnect/src/features/shared/view/widgets/vertical_card.dart';
 
@@ -44,11 +43,16 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
+    double primaryTextSize = themeController.getPrimaryTextSize();
 
     return Scaffold(
-      backgroundColor: UTSMEConnectColors.kBackgroundPrimary,
+      backgroundColor: themeController.getBackgroundPrimaryColor(),
       body: SafeArea(
           child: Center(
         child: Column(
@@ -60,16 +64,16 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                 width: screenWidth - 50,
                 height: 140,
                 decoration: BoxDecoration(
-                  color: UTSMEConnectColors.kBackgroundSecondary,
+                  color: themeController.getBackgroundSecondaryColor(),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text("Current Charge",
+                    Text("Current Charge",
                         style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 20,
+                          color: themeController.getTextColor(),
+                          fontSize: primaryTextSize,
                           fontWeight: FontWeight.bold,
                         )),
                     CircularPercentIndicator(
@@ -81,13 +85,14 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                       animateFromLastPercent: true,
                       curve: Curves.linearToEaseOut,
                       circularStrokeCap: CircularStrokeCap.round,
-                      progressColor: UTSMEConnectColors.kSelectedItem,
-                      backgroundColor: Colors.white24,
+                      progressColor: themeController.getActiveItemColor(),
+                      backgroundColor: themeController.getInActiveItemColor(),
                       backgroundWidth: 12,
                       center: Text(
                         "${charge.toInt()}%",
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 20),
+                        style: TextStyle(
+                            color: themeController.getTextColor(),
+                            fontSize: primaryTextSize),
                       ),
                     ),
                   ],
@@ -118,12 +123,13 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                       animationDuration: 2000,
                       animateFromLastPercent: true,
                       curve: Curves.linearToEaseOut,
-                      backgroundColor: Colors.white24,
-                      progressColor: UTSMEConnectColors.kMinValue,
+                      backgroundColor: themeController.getInActiveItemColor(),
+                      progressColor: themeController.getMinValueColor(),
                       center: Text(
                         minVoltage.toInt().toString(),
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 20),
+                        style: TextStyle(
+                            color: themeController.getTextColor(),
+                            fontSize: primaryTextSize),
                       ),
                     ),
 
@@ -141,12 +147,13 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                       animationDuration: 2000,
                       animateFromLastPercent: true,
                       curve: Curves.linearToEaseOut,
-                      backgroundColor: Colors.white24,
-                      progressColor: UTSMEConnectColors.kMaxValue,
+                      backgroundColor: themeController.getInActiveItemColor(),
+                      progressColor: themeController.getMaxValueColor(),
                       center: Text(
                         maxVoltage.toInt().toString(),
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 20),
+                        style: TextStyle(
+                            color: themeController.getTextColor(),
+                            fontSize: primaryTextSize),
                       ),
                     ),
 

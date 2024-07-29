@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 
-class VerticalCard extends StatelessWidget {
+class VerticalCard extends ConsumerWidget {
   const VerticalCard({
     super.key,
     required this.screenWidth,
@@ -16,14 +17,20 @@ class VerticalCard extends StatelessWidget {
   final Widget cardWidget;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
+    double primaryTextSize = themeController.getPrimaryTextSize();
+
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(
         width: screenWidth - 50,
         height: cardHeight,
         decoration: BoxDecoration(
-          color: UTSMEConnectColors.kBackgroundSecondary,
+          color: themeController.getBackgroundSecondaryColor(),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -35,9 +42,9 @@ class VerticalCard extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20),
               child: Text(
                 cardLabel,
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 20,
+                style: TextStyle(
+                  color: themeController.getTextColor(),
+                  fontSize: primaryTextSize,
                   fontWeight: FontWeight.bold,
                 ),
               ),

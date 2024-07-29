@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sizer/sizer.dart';
+import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 
-class RectangularContainer extends StatelessWidget {
+class RectangularContainer extends ConsumerWidget {
   const RectangularContainer({
     super.key,
     this.value,
@@ -14,7 +16,11 @@ class RectangularContainer extends StatelessWidget {
   final Color rectangleColor;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // retrieve the theme controller
+    UTSMEConnectThemeController themeController =
+        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+
     return SizedBox(
       height: 15.h,
       width: 50.h,
@@ -35,7 +41,7 @@ class RectangularContainer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 3.h,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white70,
+                    color: themeController.getTextColor(),
                   ))),
         ),
       ),
