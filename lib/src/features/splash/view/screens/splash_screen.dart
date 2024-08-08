@@ -28,20 +28,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
     return Scaffold(
-        backgroundColor: themeController.getBackgroundPrimaryColor(),
+        backgroundColor: themeState.primaryBackgroundColor,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Center(
               child: RectangularContainer(
                 value: "UTS:ME Connect",
-                borderColor: themeController.getBackgroundSecondaryColor(),
-                rectangleColor: themeController.getBackgroundPrimaryColor(),
+                borderColor: themeState.secondaryBackgroundColor,
+                rectangleColor: themeState.primaryBackgroundColor,
               ),
             ),
           ),

@@ -43,16 +43,16 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
-    double primaryTextSize = themeController.getPrimaryTextSize();
+    double primaryTextSize = themeState.primaryTextSize;
 
     return Scaffold(
-      backgroundColor: themeController.getBackgroundPrimaryColor(),
+      backgroundColor: themeState.primaryBackgroundColor,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -64,7 +64,7 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                 width: screenWidth - 50,
                 height: 140,
                 decoration: BoxDecoration(
-                  color: themeController.getBackgroundSecondaryColor(),
+                  color: themeState.secondaryBackgroundColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -72,7 +72,7 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                   children: [
                     Text("Current Charge",
                         style: TextStyle(
-                          color: themeController.getTextColor(),
+                          color: themeState.textColor,
                           fontSize: primaryTextSize,
                           fontWeight: FontWeight.bold,
                         )),
@@ -85,13 +85,13 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                       animateFromLastPercent: true,
                       curve: Curves.linearToEaseOut,
                       circularStrokeCap: CircularStrokeCap.round,
-                      progressColor: themeController.getActiveItemColor(),
-                      backgroundColor: themeController.getInActiveItemColor(),
+                      progressColor: themeState.activeItemColor,
+                      backgroundColor: themeState.inActiveItemColor,
                       backgroundWidth: 12,
                       center: Text(
                         "${charge.toInt()}%",
                         style: TextStyle(
-                            color: themeController.getTextColor(),
+                            color: themeState.textColor,
                             fontSize: primaryTextSize),
                       ),
                     ),
@@ -123,12 +123,12 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                       animationDuration: 2000,
                       animateFromLastPercent: true,
                       curve: Curves.linearToEaseOut,
-                      backgroundColor: themeController.getInActiveItemColor(),
-                      progressColor: themeController.getMinValueColor(),
+                      backgroundColor: themeState.inActiveItemColor,
+                      progressColor: themeState.minValueColor,
                       center: Text(
                         minVoltage.toInt().toString(),
                         style: TextStyle(
-                            color: themeController.getTextColor(),
+                            color: themeState.textColor,
                             fontSize: primaryTextSize),
                       ),
                     ),
@@ -147,12 +147,12 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
                       animationDuration: 2000,
                       animateFromLastPercent: true,
                       curve: Curves.linearToEaseOut,
-                      backgroundColor: themeController.getInActiveItemColor(),
-                      progressColor: themeController.getMaxValueColor(),
+                      backgroundColor: themeState.inActiveItemColor,
+                      progressColor: themeState.maxValueColor,
                       center: Text(
                         maxVoltage.toInt().toString(),
                         style: TextStyle(
-                            color: themeController.getTextColor(),
+                            color: themeState.textColor,
                             fontSize: primaryTextSize),
                       ),
                     ),

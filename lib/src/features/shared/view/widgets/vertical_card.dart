@@ -18,11 +18,11 @@ class VerticalCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
-    double primaryTextSize = themeController.getPrimaryTextSize();
+    double primaryTextSize = themeState.primaryTextSize;
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -30,7 +30,7 @@ class VerticalCard extends ConsumerWidget {
         width: screenWidth - 50,
         height: cardHeight,
         decoration: BoxDecoration(
-          color: themeController.getBackgroundSecondaryColor(),
+          color: themeState.secondaryBackgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -43,7 +43,7 @@ class VerticalCard extends ConsumerWidget {
               child: Text(
                 cardLabel,
                 style: TextStyle(
-                  color: themeController.getTextColor(),
+                  color: themeState.textColor,
                   fontSize: primaryTextSize,
                   fontWeight: FontWeight.bold,
                 ),

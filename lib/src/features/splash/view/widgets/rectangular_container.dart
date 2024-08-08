@@ -17,9 +17,9 @@ class RectangularContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
     return SizedBox(
       height: 15.h,
@@ -41,7 +41,7 @@ class RectangularContainer extends ConsumerWidget {
                   style: TextStyle(
                     fontSize: 3.h,
                     fontWeight: FontWeight.bold,
-                    color: themeController.getTextColor(),
+                    color: themeState.textColor,
                   ))),
         ),
       ),

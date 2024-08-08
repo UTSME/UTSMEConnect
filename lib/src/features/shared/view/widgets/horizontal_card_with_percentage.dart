@@ -17,11 +17,11 @@ class HorizontalCardWithPercentage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
-    double primaryTextSize = themeController.getPrimaryTextSize();
+    double primaryTextSize = themeState.primaryTextSize;
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -29,7 +29,7 @@ class HorizontalCardWithPercentage extends ConsumerWidget {
         width: screenWidth - 50,
         height: 140,
         decoration: BoxDecoration(
-          color: themeController.getBackgroundSecondaryColor(),
+          color: themeState.secondaryBackgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -37,7 +37,7 @@ class HorizontalCardWithPercentage extends ConsumerWidget {
           children: [
             Text(label,
                 style: TextStyle(
-                  color: themeController.getTextColor(),
+                  color: themeState.textColor,
                   fontSize: primaryTextSize,
                   fontWeight: FontWeight.bold,
                 )),
@@ -50,14 +50,13 @@ class HorizontalCardWithPercentage extends ConsumerWidget {
               animateFromLastPercent: true,
               curve: Curves.linearToEaseOut,
               circularStrokeCap: CircularStrokeCap.round,
-              progressColor: themeController.getActiveItemColor(),
-              backgroundColor: themeController.getInActiveItemColor(),
+              progressColor: themeState.activeItemColor,
+              backgroundColor: themeState.inActiveItemColor,
               backgroundWidth: 12,
               center: Text(
                 "${value.toInt()}%",
                 style: TextStyle(
-                    color: themeController.getTextColor(),
-                    fontSize: primaryTextSize),
+                    color: themeState.textColor, fontSize: primaryTextSize),
               ),
             ),
           ],

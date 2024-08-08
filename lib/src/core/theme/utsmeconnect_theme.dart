@@ -9,11 +9,49 @@ class UTSMEConnectThemeState {
   double uiScale;
   double primaryTextSize;
 
+  // theme colors
+  Color primaryBackgroundColor;
+  Color secondaryBackgroundColor;
+  Color activeItemColor;
+  Color inActiveItemColor;
+  Color textColor;
+  Color textFieldBorderColor;
+  Color textFieldErrorBorderColor;
+  Color minValueColor;
+  Color maxValueColor;
+
   UTSMEConnectThemeState({
-    required this.lightMode,
-    required this.uiScale,
-    required this.primaryTextSize,
-  });
+    this.lightMode = false,
+    this.uiScale = UTSMEConnectSizes.kDefaultUiScale,
+    this.primaryTextSize = UTSMEConnectSizes.kDefaultPrimaryTextSize,
+  })  : // set the theme colors based on the mode
+        primaryBackgroundColor = lightMode
+            ? UTSMEConnectColors.kBackgroundPrimaryL
+            : UTSMEConnectColors.kBackgroundPrimaryD,
+        secondaryBackgroundColor = lightMode
+            ? UTSMEConnectColors.kBackgroundSecondaryL
+            : UTSMEConnectColors.kBackgroundSecondaryD,
+        activeItemColor = lightMode
+            ? UTSMEConnectColors.kActiveItemL
+            : UTSMEConnectColors.kActiveItemD,
+        inActiveItemColor = lightMode
+            ? UTSMEConnectColors.kInActiveItemL
+            : UTSMEConnectColors.kInActiveItemD,
+        textColor = lightMode
+            ? UTSMEConnectColors.kTextColorL
+            : UTSMEConnectColors.kTextColorD,
+        textFieldBorderColor = lightMode
+            ? UTSMEConnectColors.kTextFieldBorderL
+            : UTSMEConnectColors.kTextFieldBorderD,
+        textFieldErrorBorderColor = lightMode
+            ? UTSMEConnectColors.kTextFieldErrorBorderL
+            : UTSMEConnectColors.kTextFieldErrorBorderD,
+        minValueColor = lightMode
+            ? UTSMEConnectColors.kMinValueL
+            : UTSMEConnectColors.kMinValueD,
+        maxValueColor = lightMode
+            ? UTSMEConnectColors.kMaxValueL
+            : UTSMEConnectColors.kMaxValueD;
 
   UTSMEConnectThemeState copyWith({
     required bool lightMode,
@@ -29,6 +67,9 @@ class UTSMEConnectThemeState {
 }
 
 /// class to do operations on the properties
+///
+/// THIS CLASS IS FOR MUTATION OPERATIONS ONLY
+/// TO ACCESS THE DATA, USE THE STATE CLASS ABOVE
 class UTSMEConnectThemeController
     extends StateNotifier<UTSMEConnectThemeState> {
   UTSMEConnectThemeController(super.state);
@@ -48,66 +89,7 @@ class UTSMEConnectThemeController
     updateState();
   }
 
-  // Colors getters
-  Color getBackgroundPrimaryColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kBackgroundPrimaryL
-        : UTSMEConnectColors.kBackgroundPrimaryD;
-  }
-
-  Color getBackgroundSecondaryColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kBackgroundSecondaryL
-        : UTSMEConnectColors.kBackgroundSecondaryD;
-  }
-
-  Color getActiveItemColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kActiveItemL
-        : UTSMEConnectColors.kActiveItemD;
-  }
-
-  Color getInActiveItemColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kInActiveItemL
-        : UTSMEConnectColors.kInActiveItemD;
-  }
-
-  Color getTextColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kTextColorL
-        : UTSMEConnectColors.kTextColorD;
-  }
-
-  Color getTextFieldBorderColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kTextFieldBorderL
-        : UTSMEConnectColors.kTextFieldBorderD;
-  }
-
-  Color getTextFieldErrorBorderColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kTextFieldErrorBorderL
-        : UTSMEConnectColors.kTextFieldErrorBorderD;
-  }
-
-  Color getMinValueColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kMinValueL
-        : UTSMEConnectColors.kMinValueD;
-  }
-
-  Color getMaxValueColor() {
-    return state.lightMode
-        ? UTSMEConnectColors.kMaxValueL
-        : UTSMEConnectColors.kMaxValueD;
-  }
-
   // Interface scaling methods
-  double getUiScale() {
-    return state.uiScale;
-  }
-
   void increaseUiScale() {
     if (state.uiScale < UTSMEConnectSizes.kMaxUiScale) {
       state.uiScale = state.uiScale += 0.1;
@@ -123,10 +105,6 @@ class UTSMEConnectThemeController
   }
 
   // Text scaling methods
-  double getPrimaryTextSize() {
-    return state.primaryTextSize;
-  }
-
   void setPrimaryTextSize(double newSize) {
     state.primaryTextSize = newSize;
     updateState();
@@ -142,9 +120,5 @@ class UTSMEConnectThemeController
 final utsmeConnectThemeControllerProvider =
     StateNotifierProvider<UTSMEConnectThemeController, UTSMEConnectThemeState>(
         (ref) {
-  return UTSMEConnectThemeController(UTSMEConnectThemeState(
-    lightMode: false,
-    uiScale: UTSMEConnectSizes.kDefaultUiScale,
-    primaryTextSize: UTSMEConnectSizes.kDefaultPrimaryTextSize,
-  ));
+  return UTSMEConnectThemeController(UTSMEConnectThemeState());
 });

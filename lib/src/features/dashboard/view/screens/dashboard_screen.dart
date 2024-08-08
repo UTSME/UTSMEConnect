@@ -45,15 +45,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      backgroundColor: themeController.getBackgroundPrimaryColor(),
+      backgroundColor: themeState.primaryBackgroundColor,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -72,23 +72,23 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 animateFromLastPercent: true,
                 curve: Curves.linearToEaseOut,
                 arcType: ArcType.HALF,
-                arcBackgroundColor: themeController.getInActiveItemColor(),
+                arcBackgroundColor: themeState.inActiveItemColor,
                 circularStrokeCap: CircularStrokeCap.round,
-                progressColor: themeController.getActiveItemColor(),
-                backgroundColor: themeController.getInActiveItemColor(),
+                progressColor: themeState.activeItemColor,
+                backgroundColor: themeState.inActiveItemColor,
                 backgroundWidth: 15,
                 center: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "${(speed).toInt()}",
-                      style: TextStyle(
-                          color: themeController.getTextColor(), fontSize: 50),
+                      style:
+                          TextStyle(color: themeState.textColor, fontSize: 50),
                     ),
                     Text(
                       "KM/H",
-                      style: TextStyle(
-                          color: themeController.getTextColor(), fontSize: 15),
+                      style:
+                          TextStyle(color: themeState.textColor, fontSize: 15),
                     ),
                   ],
                 ),
@@ -106,13 +106,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   text: TextSpan(children: [
                     TextSpan(
                       text: "${(suspension).toInt()}",
-                      style: TextStyle(
-                          color: themeController.getTextColor(), fontSize: 70),
+                      style:
+                          TextStyle(color: themeState.textColor, fontSize: 70),
                     ),
                     TextSpan(
                       text: "mm",
-                      style: TextStyle(
-                          color: themeController.getTextColor(), fontSize: 25),
+                      style:
+                          TextStyle(color: themeState.textColor, fontSize: 25),
                     ),
                   ]),
                 ),

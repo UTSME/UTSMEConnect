@@ -40,15 +40,15 @@ class _TemperatureScreenState extends ConsumerState<TemperatureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      backgroundColor: themeController.getBackgroundPrimaryColor(),
+      backgroundColor: themeState.primaryBackgroundColor,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -60,8 +60,7 @@ class _TemperatureScreenState extends ConsumerState<TemperatureScreen> {
               cardLabel: "Tire Temperature",
               cardWidget: Text(
                 "${(tireTemperature).toInt()}°",
-                style: TextStyle(
-                    color: themeController.getTextColor(), fontSize: 70),
+                style: TextStyle(color: themeState.textColor, fontSize: 70),
               ),
             ),
           ],

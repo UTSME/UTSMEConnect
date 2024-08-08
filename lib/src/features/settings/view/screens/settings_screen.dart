@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_sizes.dart';
 import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
@@ -22,10 +21,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     double screenWidth = MediaQuery.sizeOf(context).width;
     //double screenHeight = MediaQuery.sizeOf(context).height;
-    double primaryTextSize = themeController.getPrimaryTextSize();
 
     return Scaffold(
-      backgroundColor: themeController.getBackgroundPrimaryColor(),
+      backgroundColor: themeState.primaryBackgroundColor,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -37,7 +35,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 width: screenWidth - 50,
                 height: 140,
                 decoration: BoxDecoration(
-                  color: themeController.getBackgroundSecondaryColor(),
+                  color: themeState.secondaryBackgroundColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -46,8 +44,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     Text(
                       "Enable Light Mode",
                       style: TextStyle(
-                        color: themeController.getTextColor(),
-                        fontSize: primaryTextSize,
+                        color: themeState.textColor,
+                        fontSize: themeState.primaryTextSize,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -57,10 +55,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         fit: BoxFit.fill,
                         child: Switch(
                           value: themeState.lightMode,
-                          activeTrackColor:
-                              themeController.getActiveItemColor(),
-                          inactiveTrackColor:
-                              themeController.getInActiveItemColor(),
+                          activeTrackColor: themeState.activeItemColor,
+                          inactiveTrackColor: themeState.inActiveItemColor,
                           inactiveThumbColor: Colors.white,
                           onChanged: (value) =>
                               themeController.switchLightMode(),
@@ -79,7 +75,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 width: screenWidth - 50,
                 height: 180,
                 decoration: BoxDecoration(
-                  color: themeController.getBackgroundSecondaryColor(),
+                  color: themeState.secondaryBackgroundColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -92,20 +88,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         Text(
                           "Primary Text Size",
                           style: TextStyle(
-                            color: themeController.getTextColor(),
-                            fontSize: primaryTextSize,
+                            color: themeState.textColor,
+                            fontSize: themeState.primaryTextSize,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 25, right: 25),
                           child: Text(
-                            themeController
-                                .getPrimaryTextSize()
-                                .toInt()
-                                .toString(),
+                            themeState.primaryTextSize.toInt().toString(),
                             style: TextStyle(
-                              color: themeController.getTextColor(),
+                              color: themeState.textColor,
                               fontSize: 35,
                               fontWeight: FontWeight.bold,
                             ),
@@ -118,9 +111,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     Slider(
                       min: UTSMEConnectSizes.kMinPrimaryTextSize,
                       max: UTSMEConnectSizes.kMaxPrimaryTextSize,
-                      activeColor: themeController.getActiveItemColor(),
-                      inactiveColor: themeController.getInActiveItemColor(),
-                      value: themeController.getPrimaryTextSize(),
+                      activeColor: themeState.activeItemColor,
+                      inactiveColor: themeState.inActiveItemColor,
+                      value: themeState.primaryTextSize,
                       onChanged: (value) =>
                           themeController.setPrimaryTextSize(value),
                     ),
@@ -131,9 +124,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       //shape: BorderRadiusDirectional.circular(radius),
                       style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(
-                            themeController.getInActiveItemColor()),
+                            themeState.inActiveItemColor),
                         overlayColor: WidgetStatePropertyAll(
-                            themeController.getInActiveItemColor()),
+                            themeState.inActiveItemColor),
                         shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -144,8 +137,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       child: Text(
                         "Reset to Default Size",
                         style: TextStyle(
-                          color: themeController.getTextColor(),
-                          fontSize: primaryTextSize,
+                          color: themeState.textColor,
+                          fontSize: themeState.primaryTextSize,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

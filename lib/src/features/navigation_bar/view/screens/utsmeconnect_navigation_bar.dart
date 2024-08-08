@@ -27,9 +27,9 @@ class _UTSMEConnectNavigationBarState
 
   @override
   Widget build(BuildContext context) {
-    // retrieve the theme controller
-    UTSMEConnectThemeController themeController =
-        ref.watch(utsmeConnectThemeControllerProvider.notifier);
+    // retrieve the theme state
+    UTSMEConnectThemeState themeState =
+        ref.watch(utsmeConnectThemeControllerProvider);
 
     return Scaffold(
       body: SizedBox(
@@ -39,9 +39,9 @@ class _UTSMEConnectNavigationBarState
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: themeController.getBackgroundSecondaryColor(),
-        selectedItemColor: themeController.getActiveItemColor(),
-        unselectedItemColor: themeController.getTextColor(),
+        backgroundColor: themeState.secondaryBackgroundColor,
+        selectedItemColor: themeState.activeItemColor,
+        unselectedItemColor: themeState.textColor,
         currentIndex: selectedIndex,
         iconSize: 30,
         onTap: (index) {
