@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:utsmeconnect/src/core/constants/utsmeconnect_paths.dart';
 import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
+import 'package:utsmeconnect/src/features/settings/view/screens/settings_screen.dart';
 import 'package:utsmeconnect/src/features/shared/view/widgets/vertical_card.dart';
 import 'package:utsmeconnect/src/features/temperature/controller/temperature_controller.dart';
 
@@ -48,6 +50,20 @@ class _TemperatureScreenState extends ConsumerState<TemperatureScreen> {
     //double screenHeight = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
+      // Appbar with UTSME Text logo and settings drawer
+      appBar: AppBar(
+        title: Image.asset(UTSMEConnectPaths.kLogoText, scale: 1.4),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              icon: const Icon(Icons.settings),
+              iconSize: 30,
+            ),
+          ),
+        ],
+      ),
+      endDrawer: const Drawer(child: SettingsScreen()),
       backgroundColor: themeState.primaryBackgroundColor,
       body: SafeArea(
           child: Center(

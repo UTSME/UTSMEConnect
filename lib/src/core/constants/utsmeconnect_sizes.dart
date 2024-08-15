@@ -1,8 +1,8 @@
 class UTSMEConnectSizes {
   // Text font sizes
-  static const double kDefaultPrimaryTextSize = 22;
+  static const double kDefaultPrimaryTextSize = 17.5;
   static const double kMinPrimaryTextSize = 15;
-  static const double kMaxPrimaryTextSize = 28;
+  static const double kMaxPrimaryTextSize = 20;
 
   // UI SCale sizes
   static const double kDefaultUiScale = 1.0;

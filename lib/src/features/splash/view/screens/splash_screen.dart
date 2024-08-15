@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:utsmeconnect/src/core/constants/utsmeconnect_paths.dart';
 import 'package:utsmeconnect/src/core/navigation/utsmeconnect_router.dart';
 import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 import 'package:utsmeconnect/src/features/splash/view/widgets/rectangular_container.dart';
@@ -38,11 +39,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Center(
-              child: RectangularContainer(
-                value: "UTS:ME Connect",
-                borderColor: themeState.secondaryBackgroundColor,
-                rectangleColor: themeState.primaryBackgroundColor,
-              ),
+              child: Image.asset(UTSMEConnectPaths.kLogoSplash, scale: 2),
             ),
           ),
         ));

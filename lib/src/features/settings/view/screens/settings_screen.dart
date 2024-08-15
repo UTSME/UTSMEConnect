@@ -28,7 +28,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           child: Center(
         child: Column(
           children: [
-            // Enable Light Mode
+            // Enable Dark Mode
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
@@ -42,7 +42,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Enable Light Mode",
+                      "Enable Dark Mode",
                       style: TextStyle(
                         color: themeState.textColor,
                         fontSize: themeState.primaryTextSize,
@@ -54,12 +54,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       child: FittedBox(
                         fit: BoxFit.fill,
                         child: Switch(
-                          value: themeState.lightMode,
+                          value: themeState.darkMode,
                           activeTrackColor: themeState.activeItemColor,
                           inactiveTrackColor: themeState.inActiveItemColor,
                           inactiveThumbColor: Colors.white,
                           onChanged: (value) =>
-                              themeController.switchLightMode(),
+                              themeController.switchDarkMode(),
                         ),
                       ),
                     ),

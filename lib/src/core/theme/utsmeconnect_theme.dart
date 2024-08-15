@@ -5,7 +5,7 @@ import 'package:utsmeconnect/src/core/constants/utsmeconnect_sizes.dart';
 
 /// class to contain the properties
 class UTSMEConnectThemeState {
-  bool lightMode;
+  bool darkMode;
   double uiScale;
   double primaryTextSize;
 
@@ -21,45 +21,45 @@ class UTSMEConnectThemeState {
   Color maxValueColor;
 
   UTSMEConnectThemeState({
-    this.lightMode = false,
+    this.darkMode = false,
     this.uiScale = UTSMEConnectSizes.kDefaultUiScale,
     this.primaryTextSize = UTSMEConnectSizes.kDefaultPrimaryTextSize,
   })  : // set the theme colors based on the mode
-        primaryBackgroundColor = lightMode
-            ? UTSMEConnectColors.kBackgroundPrimaryL
-            : UTSMEConnectColors.kBackgroundPrimaryD,
-        secondaryBackgroundColor = lightMode
-            ? UTSMEConnectColors.kBackgroundSecondaryL
-            : UTSMEConnectColors.kBackgroundSecondaryD,
-        activeItemColor = lightMode
-            ? UTSMEConnectColors.kActiveItemL
-            : UTSMEConnectColors.kActiveItemD,
-        inActiveItemColor = lightMode
-            ? UTSMEConnectColors.kInActiveItemL
-            : UTSMEConnectColors.kInActiveItemD,
-        textColor = lightMode
-            ? UTSMEConnectColors.kTextColorL
-            : UTSMEConnectColors.kTextColorD,
-        textFieldBorderColor = lightMode
-            ? UTSMEConnectColors.kTextFieldBorderL
-            : UTSMEConnectColors.kTextFieldBorderD,
-        textFieldErrorBorderColor = lightMode
-            ? UTSMEConnectColors.kTextFieldErrorBorderL
-            : UTSMEConnectColors.kTextFieldErrorBorderD,
-        minValueColor = lightMode
-            ? UTSMEConnectColors.kMinValueL
-            : UTSMEConnectColors.kMinValueD,
-        maxValueColor = lightMode
-            ? UTSMEConnectColors.kMaxValueL
-            : UTSMEConnectColors.kMaxValueD;
+        primaryBackgroundColor = darkMode
+            ? UTSMEConnectColors.kBackgroundPrimaryD
+            : UTSMEConnectColors.kBackgroundPrimaryL,
+        secondaryBackgroundColor = darkMode
+            ? UTSMEConnectColors.kBackgroundSecondaryD
+            : UTSMEConnectColors.kBackgroundSecondaryL,
+        activeItemColor = darkMode
+            ? UTSMEConnectColors.kActiveItemD
+            : UTSMEConnectColors.kActiveItemL,
+        inActiveItemColor = darkMode
+            ? UTSMEConnectColors.kInActiveItemD
+            : UTSMEConnectColors.kInActiveItemL,
+        textColor = darkMode
+            ? UTSMEConnectColors.kTextColorD
+            : UTSMEConnectColors.kTextColorL,
+        textFieldBorderColor = darkMode
+            ? UTSMEConnectColors.kTextFieldBorderD
+            : UTSMEConnectColors.kTextFieldBorderL,
+        textFieldErrorBorderColor = darkMode
+            ? UTSMEConnectColors.kTextFieldErrorBorderD
+            : UTSMEConnectColors.kTextFieldErrorBorderL,
+        minValueColor = darkMode
+            ? UTSMEConnectColors.kMinValueD
+            : UTSMEConnectColors.kMinValueL,
+        maxValueColor = darkMode
+            ? UTSMEConnectColors.kMaxValueD
+            : UTSMEConnectColors.kMaxValueL;
 
   UTSMEConnectThemeState copyWith({
-    required bool lightMode,
+    required bool darkMode,
     required double uiScale,
     required double primaryTextSize,
   }) {
     return UTSMEConnectThemeState(
-      lightMode: lightMode,
+      darkMode: darkMode,
       uiScale: uiScale,
       primaryTextSize: primaryTextSize,
     );
@@ -77,15 +77,15 @@ class UTSMEConnectThemeController
   // Method to update the state after mutation
   void updateState() {
     state = state.copyWith(
-      lightMode: state.lightMode,
+      darkMode: state.darkMode,
       uiScale: state.uiScale,
       primaryTextSize: state.primaryTextSize,
     );
   }
 
-  // Light mode switch
-  void switchLightMode() {
-    state.lightMode = !state.lightMode;
+  // Dark mode switch
+  void switchDarkMode() {
+    state.darkMode = !state.darkMode;
     updateState();
   }
 

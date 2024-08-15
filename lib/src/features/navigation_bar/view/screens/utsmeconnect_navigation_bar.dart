@@ -63,10 +63,10 @@ class _UTSMEConnectNavigationBarState
             icon: Icon(Icons.thermostat),
             label: "Temperature",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.settings),
+          //   label: "Settings",
+          // ),
         ],
       ),
     );

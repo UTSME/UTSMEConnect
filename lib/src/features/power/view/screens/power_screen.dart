@@ -2,9 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:utsmeconnect/src/core/constants/utsmeconnect_paths.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_values.dart';
 import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
 import 'package:utsmeconnect/src/features/power/controller/power_controller.dart';
+import 'package:utsmeconnect/src/features/settings/view/screens/settings_screen.dart';
 import 'package:utsmeconnect/src/features/shared/view/widgets/vertical_card.dart';
 
 class PowerScreen extends ConsumerStatefulWidget {
@@ -52,6 +54,20 @@ class _PowerScreenState extends ConsumerState<PowerScreen> {
     double primaryTextSize = themeState.primaryTextSize;
 
     return Scaffold(
+      // Appbar with UTSME Text logo and settings drawer
+      appBar: AppBar(
+        title: Image.asset(UTSMEConnectPaths.kLogoText, scale: 1.4),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              icon: const Icon(Icons.settings),
+              iconSize: 30,
+            ),
+          ),
+        ],
+      ),
+      endDrawer: const Drawer(child: SettingsScreen()),
       backgroundColor: themeState.primaryBackgroundColor,
       body: SafeArea(
           child: Center(

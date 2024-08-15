@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class UTSMEConnectColors {
   // Light Mode
-  static const Color kBackgroundPrimaryL = Color.fromARGB(255, 255, 255, 255);
+  static const Color kBackgroundPrimaryL = Color.fromARGB(255, 232, 232, 232);
   static const Color kBackgroundSecondaryL = Color.fromARGB(255, 88, 88, 88);
   static const Color kActiveItemL = Color.fromARGB(255, 255, 221, 0);
   static const Color kInActiveItemL = Color.fromARGB(255, 0, 0, 0);
