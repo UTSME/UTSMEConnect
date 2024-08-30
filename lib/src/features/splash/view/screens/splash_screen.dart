@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_paths.dart';
 import 'package:utsmeconnect/src/core/navigation/utsmeconnect_router.dart';
 import 'package:utsmeconnect/src/core/theme/utsmeconnect_theme.dart';
-import 'package:utsmeconnect/src/features/splash/view/widgets/rectangular_container.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});

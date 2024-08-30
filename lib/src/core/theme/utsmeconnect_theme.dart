@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_colors.dart';
 import 'package:utsmeconnect/src/core/constants/utsmeconnect_sizes.dart';
+import 'package:utsmeconnect/src/core/theme/theme_settings_controller.dart';
 
 /// class to contain the properties
 class UTSMEConnectThemeState {
@@ -74,12 +75,22 @@ class UTSMEConnectThemeController
     extends StateNotifier<UTSMEConnectThemeState> {
   UTSMEConnectThemeController(super.state);
 
+  // Theme settings controller to persist user settings
+  final ThemeSettingsController _themeSettingsController =
+      ThemeSettingsController.instance();
+
   // Method to update the state after mutation
   void updateState() {
     state = state.copyWith(
       darkMode: state.darkMode,
       uiScale: state.uiScale,
       primaryTextSize: state.primaryTextSize,
+    );
+    // Update the persistent local storage
+    _themeSettingsController.updateThemeSettings(
+      state.darkMode,
+      state.uiScale,
+      state.primaryTextSize,
     );
   }
 
@@ -120,5 +131,11 @@ class UTSMEConnectThemeController
 final utsmeConnectThemeControllerProvider =
     StateNotifierProvider<UTSMEConnectThemeController, UTSMEConnectThemeState>(
         (ref) {
-  return UTSMEConnectThemeController(UTSMEConnectThemeState());
+  // Retrieve the theme settings from the persistent local storage
+  var themeSettings = ThemeSettingsController.instance().getThemeSettings();
+  return UTSMEConnectThemeController(UTSMEConnectThemeState(
+    darkMode: themeSettings.darkMode,
+    uiScale: themeSettings.uiScale,
+    primaryTextSize: themeSettings.primaryTextSize,
+  ));
 });
